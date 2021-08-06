@@ -19,13 +19,13 @@ record = match_result.group(1)
 if re.search(r'2\. Today\n3\.', record):
     print('Today content is empty.')
     sys.exit()
-item_regex = r'\* (\([A-Za-z ]+\)) (.*?) \((#[0-9]+|#\?|\w+ \d+), (https:\/\/app.clickup.com\/t\/\w+)\)'
+item_regex = r'\* (\([A-Za-z ]+\)) \[(.*?)\]\((https:\/\/app.clickup.com\/t\/\w+)\).*'
 result_record = record
 for item in re.finditer(item_regex, record):
     full = item.group(0)
     status = item.group(1)
     title = item.group(2)
-    clickUpUrl = item.group(4)
+    clickUpUrl = item.group(3)
     result_record = result_record.replace(full, f'* {status} <a href="{clickUpUrl}">{title}</a>')
 result_record = result_record.replace('  -', '&nbsp;&nbsp;-')
 result_record = result_record.replace('    *', '&nbsp;&nbsp;&nbsp;&nbsp;*')
