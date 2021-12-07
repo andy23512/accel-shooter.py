@@ -19,10 +19,11 @@ record = match_result.group(1)
 if re.search(r'2\. Today\n3\.', record):
     print('Today content is empty.')
     sys.exit()
-item_regex = r'\* (\([A-Za-z ]+\)) \[(.*?)\]\((https:\/\/app.clickup.com\/t\/\w+)\).*'
+item_regex = r'\* (\([A-Za-z0-9 %]+\)) \[(.*?)\]\((https:\/\/app.clickup.com\/t\/\w+)\).*'
 result_record = record
 for item in re.finditer(item_regex, record):
     full = item.group(0)
+    print(full)
     status = item.group(1)
     title = item.group(2)
     clickUpUrl = item.group(3)
