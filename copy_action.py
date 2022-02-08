@@ -23,7 +23,6 @@ item_regex = r'\* (\([A-Za-z0-9 %]+\)) \[(.*?)\]\((https:\/\/app.clickup.com\/t\
 result_record = record
 for item in re.finditer(item_regex, record):
     full = item.group(0)
-    print(full)
     status = item.group(1)
     title = item.group(2)
     clickUpUrl = item.group(3)
