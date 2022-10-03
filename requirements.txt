@@ -1,1 +1,2 @@
 richxerox==1.0.1
+pyyaml==6.0

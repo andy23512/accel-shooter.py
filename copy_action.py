@@ -1,15 +1,16 @@
-import json
 import os
 import re
 import sys
 from datetime import date
 from os.path import expanduser
 
+import yaml
 from richxerox import copy
+
 
 config_path = os.getenv('ACCEL_SHOOTER_CONFIG_FILE')
 with open(config_path) as f:
-    config = json.load(f)
+    config = yaml.safe_load(f)
 day = sys.argv[1] if len(sys.argv) >= 2 else date.today().strftime('%Y/%m/%d')
 with open(expanduser(config['DailyProgressFile'])) as f:
     content = f.readlines()
@@ -32,5 +33,5 @@ result_record = result_record.replace('    *', '&nbsp;&nbsp;&nbsp;&nbsp;*')
 result_record = result_record.replace('\n', '<br/>')
 copy(
     text=record,
-    html=result_record
+    html=result_record,
 )
